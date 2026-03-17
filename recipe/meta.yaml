@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 91d30c189e9e49e5e4e7e1d138fe8d4fe0fb76e51ca0ae89490e13ceb82708e9
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - geotransform_footprints = solaris.bin.geotransform_footprints:main
@@ -24,7 +24,7 @@ build:
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
     - gdal
   run:
     - affine
@@ -38,7 +38,7 @@ requirements:
     - opencv
     - pandas
     - pyproj
-    - python
+    - python >={{ python_min }}
     - pyyaml
     - rasterio
     - requests
@@ -53,6 +53,8 @@ requirements:
     - urllib3
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - solaris
 
